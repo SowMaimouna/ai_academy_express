@@ -1,0 +1,126 @@
+<style>
+    /* ===== Page de profil utilisateur ===== */
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #2c3e50;
+}
+
+.table {
+  width: 60%;
+  margin: 0 auto 30px;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+  background-color: #3498db;
+  color: white;
+  padding: 15px;
+  text-align: left;
+  width: 30%;
+}
+
+.table td {
+  background-color: #f9f9f9;
+  padding: 15px;
+}
+
+h4 {
+  text-align: center;
+  color: #27ae60;
+  margin-bottom: 20px;
+}
+
+/* Boutons */
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.btn-primary {
+  background-color: #3498db;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.btn-info {
+  background-color: #f39c12;
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #e67e22;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+</style>
+<h1>Détails du cours: <%= course.title %></h1> 
+<table class="table"> 
+<tr> 
+<th>Titre</th> 
+<td><%= course.title %></td> 
+</tr> 
+<tr> 
+<th>Description</th> 
+<td><%= course.description %></td> 
+</tr> 
+<tr> 
+<th>Nombre maximum d'étudiants</th> 
+<td><%= course.maxStudents %></td> 
+</tr> 
+<tr> 
+<th>Coût</th> 
+<td><%= course.cost %> €</td> 
+</tr> 
+</table>  
+<h3 class="btn btn-primary">Inscriptions</h3>
+<% if (enrollments.length > 0) { %>
+    <ul>
+        <% enrollments.forEach(e => { %>
+            <li><strong><%= e.name %></strong> – <%= e.email %></li>
+            <% }) %>
+        </ul>
+        <% } else { %>
+            <p>Aucune inscription pour ce cours pour le moment.</p>
+            <% } %>
+            <div class="button-group"> 
+            <a href="/courses" class="btn btn-primary">Tous les cours</a> 
+            <a href="<%= `/courses/${course._id}/edit` %>" class="btn btn-info">Modifier</a> 
+            <a href="<%= `/courses/${course._id}/delete?_method=DELETE` %>"  
+            onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours?')"  
+            class="btn btn-danger"> 
+            Supprimer 
+            </a>
+            <a href="/courses/<%= course._id %>/enroll" class="btn btn-primary">S'inscrire</a>
+            </div> 

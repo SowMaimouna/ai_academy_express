@@ -6,8 +6,6 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 const session = require("express-session");
 const mongoose = require("mongoose");  
-// const usersRoutes = require("./routes/users");
-// const coursesRoutes = require("./routes/courses");
 const usersController = require("./controllers/usersController"); 
 const coursesController = require("./controllers/coursesController");
 // Servir les fichiers statiques 
@@ -99,6 +97,8 @@ app.get("/courses/:id", coursesController.show, coursesController.showView);
 app.get("/courses/:id/edit", coursesController.edit); 
 app.put("/courses/:id/update", coursesController.update, coursesController.redirectView); 
 app.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
+app.get("/courses/:id/enroll", coursesController.enrollForm);
+app.post("/courses/:id/enroll", coursesController.processEnrollment);
 
 // Gestion des erreurs 
 app.use(errorController.pageNotFoundError);

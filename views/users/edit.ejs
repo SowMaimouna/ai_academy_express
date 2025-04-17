@@ -1,0 +1,93 @@
+<style>
+    /* ==== Formulaires utilisateurs ==== */
+    .data-form {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .data-form h2 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+    }
+
+    /* Champs du formulaire */
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #34495e;
+        font-weight: bold;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 10px 14px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 3px rgba(52, 152, 219, 0.5);
+    }
+
+    /* Bouton */
+    .btn.btn-primary {
+        width: 100%;
+        background-color: #3498db;
+        padding: 12px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    .btn.btn-primary:hover {
+        background-color: #2980b9;
+    }
+</style>
+<div class="data-form"> 
+    <form method="POST" action="<%= `/users/${user._id}/update?_method=PUT` %>"> 
+    <h2>Modifier l'utilisateur:</h2> 
+    <div class="form-group"> 
+    <label for="inputFirstName">Prénom</label> 
+    <input type="text" name="first" id="inputFirstName" class="form-control" value="<%= 
+    user.name.first %>" placeholder="Prénom" autofocus> 
+    </div> 
+    <div class="form-group"> 
+    <label for="inputLastName">Nom</label> 
+    <input type="text" name="last" id="inputLastName" class="form-control" value="<%= 
+    user.name.last %>" placeholder="Nom"> 
+    </div> 
+    <div class="form-group"> 
+    <label for="inputPassword">Mot de passe</label> 
+    <input type="password" name="password" id="inputPassword" class="form-control" 
+    value="<%= user.password %>" placeholder="Mot de passe" required> 
+    </div> 
+    <div class="form-group"> 
+    <label for="inputEmail">Adresse email</label> 
+    <input type="email" name="email" id="inputEmail" class="form-control" value="<%= 
+    user.email %>" placeholder="Adresse email" required> 
+    </div> 
+    <div class="form-group"> 
+    <label for="inputZipCode">Code Postal</label> 
+    <input type="text" name="zipCode" id="inputZipCode" pattern="\d{5}" class="form-control" 
+    value="<%= user.zipCode %>" placeholder="Code Postal" required> 
+    </div> 
+    <button type="submit" class="btn btn-primary">Mettre à jour</button> 
+    </form> 
+    </div> 
