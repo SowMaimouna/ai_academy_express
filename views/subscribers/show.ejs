@@ -1,0 +1,55 @@
+<style>
+    .subscriber-details {
+  background-color: #f7f7f7;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+a.btn-primary {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.sup {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.modif {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+</style>
+<% if (alertMessage) { %>
+    <script>
+      alert("<%= alertMessage %>");
+    </script>
+  <% } %>  
+<h2>Détails de l'abonné</h2> 
+<div class="subscriber-details"> 
+<h3><%= subscriber.name %></h3> 
+<p><strong>Email:</strong> <%= subscriber.email %></p> 
+<p><strong>Code Postal:</strong> <%= subscriber.zipCode %></p> 
+</div> 
+<a href="/subscribers" class="btn btn-primary">Retour à la liste</a><br><br>
+<a href="/subscribers/<%= subscriber._id %>/edit" class="modif"> Modifier</a>
+<form action="/subscribers/<%= subscriber._id %>/delete" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer cet abonné ?');">
+    <button type="submit" class="sup">🗑 Supprimer</button>
+</form>
+
+  

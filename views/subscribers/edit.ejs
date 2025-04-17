@@ -1,0 +1,57 @@
+<style>
+h2{
+        text-align: center;
+}
+form {
+  max-width: 500px;
+  margin: 0 auto 30px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%; 
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.btn {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+</style>
+<h2>Modifier l'abonné</h2>
+<form action="/subscribers/<%= subscriber._id %>/update" method="POST">
+  <div class="form-group">
+    <label for="name">Nom complet</label>
+    <input type="text" class="form-control" id="name" name="name" value="<%= subscriber.name %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="<%= subscriber.email %>" required>
+  </div>
+
+  <div class="form-group">
+    <label for="zipCode">Code Postal</label>
+    <input type="text" class="form-control" id="zipCode" name="zipCode" value="<%= subscriber.zipCode %>" required pattern="\d{5}">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enregistrer</button>
+  <a href="/subscribers" class="btn btn-secondary">Annuler</a>
+</form>
