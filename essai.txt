@@ -1,0 +1,50 @@
+const express = require("express"); 
+const router = express.Router(); 
+const usersController = require("../controllers/usersController"); 
+const authController = require("../controllers/authController");// Vérifie que l'utilisateur est connecté pour toutes les routes 
+router.use(authController.ensureLoggedIn); 
+// Routes CRUD pour les utilisateurs 
+router.get("/", usersController.index, usersController.indexView); 
+router.get("/new", usersController.new); 
+router.post("/create", usersController.validate, usersController.create, 
+usersController.redirectView); 
+router.get("/:id", usersController.show, usersController.showView); 
+router.get("/:id/edit", usersController.edit); 
+router.put("/:id/update", usersController.update, usersController.redirectView); 
+router.delete("/:id/delete", usersController.delete, usersController.redirectView); 
+module.exports = router;
+
+const express = require("express"); 
+const router = express.Router(); 
+const coursesController = require("../controllers/coursesController"); 
+const authController = require("../controllers/authController");
+
+router.use(authController.ensureLoggedIn);
+
+router.get("/courses", coursesController.index, coursesController.indexView);
+router.get("/courses/new", coursesController.new);
+router.post("/courses/create", coursesController.create, coursesController.redirectView);
+router.get("/courses/:id", coursesController.show, coursesController.showView);
+router.get("/courses/:id/edit", coursesController.edit);
+router.put("/courses/:id/update", coursesController.update, coursesController.redirectView);
+router.delete("/courses/:id/delete", coursesController.delete, coursesController.redirectView);
+router.get("/courses/:id/enroll", coursesController.enrollForm);
+router.post("/courses/:id/enroll", coursesController.processEnrollment);
+
+module.exports = router; 
+
+const express = require("express"); 
+const router = express.Router(); 
+const userRoutes = require("./userRoutes"); 
+const courseRoutes = require("./courseRoutes"); 
+const subscriberRoutes = require("./subscriberRoutes"); 
+const apiRoutes = require("./apiRoutes"); 
+const homeRoutes = require("./homeRoutes"); 
+const errorRoutes = require("./errorRoutes"); 
+router.use("/users", userRoutes); 
+router.use("/courses", courseRoutes); 
+router.use("/subscribers", subscriberRoutes); 
+router.use("/api", apiRoutes); 
+router.use("/", homeRoutes); 
+router.use("/", errorRoutes); 
+module.exports = router;

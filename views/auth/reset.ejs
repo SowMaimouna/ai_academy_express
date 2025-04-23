@@ -1,0 +1,5 @@
+<h2>Réinitialiser le mot de passe</h2>
+<form action="/reset/<%= token %>" method="POST">
+  <input type="password" name="password" placeholder="Nouveau mot de passe" required />
+  <button type="submit">Changer le mot de passe</button>
+</form>
