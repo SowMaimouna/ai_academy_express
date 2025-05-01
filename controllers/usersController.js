@@ -125,5 +125,22 @@ index: (req, res, next) => {
         console.log(`Erreur lors de la suppression de l'utilisateur par ID: ${error.message}`); 
         next(); 
       }); 
-  } 
+  }, 
+  getApiToken: (req, res) => { 
+    if (req.user) { 
+    let signedToken = jsonWebToken.sign( 
+    { 
+    data: req.user._id, 
+    exp: new Date().setDate(new Date().getDate() + 30) // Token valable 30 jours 
+    }, 
+    token_key 
+    ); 
+    res.render("users/api-token", { 
+    token: signedToken 
+    }); 
+    } else { 
+    req.flash("error", "Vous devez être connecté pour obtenir un token API."); 
+    res.redirect("/login"); 
+    } 
+    }
 }; 
